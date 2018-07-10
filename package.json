@@ -1,0 +1,23 @@
+{
+  "name": "vialer-js-availability-voipgrid",
+  "version": "1.0.0",
+  "description": "Vialer-js Availability provider for the VoIPGRID platform.",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/vialer/vialer-js-availability-voipgrid.git"
+  },
+  "keywords": [
+    "softphone",
+    "vialer-js"
+  ],
+  "author": "Windshaft B.V.",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/vialer/vialer-js-availability-voipgrid/issues"
+  },
+  "homepage": "https://github.com/vialer/vialer-js-availability-voipgrid#readme"
+}
