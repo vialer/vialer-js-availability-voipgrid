@@ -1,13 +1,13 @@
-const AvailabilityAdapter = require('vialer-js/src/js/bg/modules/availability/adapter')
+const AvailabilityAddon = require('vialer-js/src/js/bg/modules/availability/addon')
 
-class AvailabilityAdapterVoipgrid extends AvailabilityAdapter {
+class AvailabilityAddonVg extends AvailabilityAddon {
     constructor(app) {
         super(app)
 
         this.app.on('bg:availability:account_reset', () => {
             const selected = app.utils.copyObject(this.app.state.user.platform.account)
             this.app.logger.info(`${this}reset account to ConnectAB platform default ${selected.username}`)
-            this.app.setState({settings: {webrtc: {account: {selected}, enabled: false}}}, {persist: true})
+            this.app.setState({settings: {webrtc: {account: {selected}, enabled: false, toggle: false}}}, {persist: true})
         })
     }
 
@@ -30,7 +30,12 @@ class AvailabilityAdapterVoipgrid extends AvailabilityAdapter {
     _platformData({callback = null} = {}) {
         return new Promise(async(resolve, reject) => {
             this.app.setState({settings: {webrtc: {account: {status: 'loading'}}}})
-            let res = await this.app.api.client.get('api/userdestination/')
+            let res
+            try {
+                res = await this.app.api.client.get('api/userdestination/')
+            } catch (err) {
+                return reject(err)
+            }
 
             if (this.app.api.NOTOK_STATUS.includes(res.status)) {
                 this.app.logger.warn(`${this}platform data request failed (${res.status})`)
@@ -62,9 +67,7 @@ class AvailabilityAdapterVoipgrid extends AvailabilityAdapter {
                 return reject(err)
             }
 
-
             let voipaccounts = res.data.objects
-
             let platformAccounts = userdestination.phoneaccounts.map((i) => {
                 // The options for successful softphone usage.
                 let settings = {
@@ -132,9 +135,9 @@ class AvailabilityAdapterVoipgrid extends AvailabilityAdapter {
     * @returns {String} - An identifier for this module.
     */
     toString() {
-        return `${this.app}[availability-voipgrid] `
+        return `${this.app}[addon-availability-vg] `
     }
 
 }
 
-module.exports = AvailabilityAdapterVoipgrid
+module.exports = AvailabilityAddonVg

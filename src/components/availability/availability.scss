@@ -1,0 +1,15 @@
+@import "vialer-js/lib/variables";
+
+.component-availability-vg {
+    .platform-availability {
+        .switch[type="checkbox"] {
+            & + label::before {
+                background: $yellow-color;
+            }
+
+            &:checked + label::before {
+                background: $green-color;
+            }
+        }
+    }
+}
