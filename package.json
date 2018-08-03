@@ -1,23 +1,26 @@
 {
-  "name": "vjs-addon-availability-vg",
-  "version": "3.0.0",
-  "description": "Vialer-js Availability addon for the VoIPGRID API.",
-  "main": "index.js",
-  "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
-  },
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/vialer/vjs-addon-availability-vg.git"
-  },
-  "keywords": [
+    "name": "vjs-addon-availability-vg",
+    "version": "3.0.0",
+    "description": "Vialer-js Availability addon for the VoIPGRID API.",
+    "main": "index.js",
+    "scripts": {
+        "test": "echo \"Error: no test specified\" && exit 1"
+    },
+    "repository": {
+        "type": "git",
+        "url": "git+https://github.com/vialer/vjs-addon-availability-vg.git"
+    },
+    "peerDependencies": {
+        "vialer-js": "4.x"
+    },
+    "keywords": [
     "softphone",
     "vialer-js"
-  ],
-  "author": "Windshaft B.V.",
-  "license": "MIT",
-  "bugs": {
+    ],
+    "author": "Windshaft B.V.",
+    "license": "MIT",
+    "bugs": {
     "url": "https://github.com/vialer/vjs-addon-availability-vg/issues"
-  },
-  "homepage": "https://github.com/vialer/vjs-addon-availability-vg#readme"
+    },
+    "homepage": "https://github.com/vialer/vjs-addon-availability-vg#readme"
 }
