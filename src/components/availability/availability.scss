@@ -1,6 +1,8 @@
 @import "vialer-js/lib/variables";
 
 .component-availability-vg {
+    width: 100%;
+
     .platform-availability {
         .switch[type="checkbox"] {
             & + label::before {
