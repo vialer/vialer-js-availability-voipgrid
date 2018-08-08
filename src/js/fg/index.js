@@ -1,4 +1,4 @@
-const Module = require('vialer-js/src/js/fg/lib/module')
+const Module = require('vialer-js/fg/lib/module')
 
 /**
 * Main entrypoint for Queues.

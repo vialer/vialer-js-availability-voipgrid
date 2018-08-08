@@ -10,17 +10,14 @@
         "type": "git",
         "url": "git+https://github.com/vialer/vjs-addon-availability-vg.git"
     },
-    "peerDependencies": {
-        "vialer-js": "4.x"
-    },
     "keywords": [
-    "softphone",
-    "vialer-js"
+        "softphone",
+        "vialer-js"
     ],
     "author": "Windshaft B.V.",
     "license": "MIT",
     "bugs": {
-    "url": "https://github.com/vialer/vjs-addon-availability-vg/issues"
+        "url": "https://github.com/vialer/vjs-addon-availability-vg/issues"
     },
     "homepage": "https://github.com/vialer/vjs-addon-availability-vg#readme"
 }
