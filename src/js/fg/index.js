@@ -1,8 +1,8 @@
-const Module = require('vialer-js/fg/lib/module')
+const Module = require('vialer-js/lib/module')
 
 /**
 * Main entrypoint for Queues.
-* @memberof AppForeground.modules
+* @memberof AppForeground.plugins
 */
 class ModuleAvailabilityVg extends Module {
     constructor(app) {

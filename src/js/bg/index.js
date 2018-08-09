@@ -122,7 +122,7 @@ class AvailabilityAddonVg extends AvailabilityAddon {
             res = await this.app.api.client.put(endpoint, {fixeddestination: null, phoneaccount: null})
         }
 
-        this.app.modules.ui.menubarState()
+        this.app.plugins.ui.menubarState()
         if (this.app.api.UNAUTHORIZED_STATUS.includes(res.status)) {
             this.app.logger.warn(`${this}unauthorized availability request`)
             return
