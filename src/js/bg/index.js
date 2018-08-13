@@ -1,4 +1,4 @@
-const AvailabilityAddon = require('vialer-js/bg/modules/availability/addon')
+const AvailabilityAddon = require('vialer-js/bg/plugins/availability/addon')
 
 class AvailabilityAddonVg extends AvailabilityAddon {
     constructor(app) {
