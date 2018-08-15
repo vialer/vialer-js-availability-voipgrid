@@ -67,39 +67,28 @@ class AvailabilityAddonVg extends AvailabilityAddon {
                 return reject(err)
             }
 
-            let voipaccounts = res.data.objects
-            let platformAccounts = userdestination.phoneaccounts.map((i) => {
-                // The options for successful softphone usage.
-                let settings = {
-                    avpf: false,
-                    encryption: false,
-                    ua: null,
-                }
-
-                let registeredAccount = voipaccounts.find((j) => (j.account_id === i.account_id && j.sipreginfo))
-                if (registeredAccount) settings.ua = registeredAccount.sipreginfo.useragent
-                // The expert options need to be parsed first.
-                Object.assign(settings, this.app.utils.parseConfigLine(i.expert_options))
-                return {
-                    id: i.id,
-                    name: `${i.internal_number} - ${i.description}`,
-                    password: i.password,
-                    settings,
-                    uri: `sip:${i.account_id}@voipgrid.nl`,
-                    username: i.account_id,
-                }
-            })
-
+            const __res = await this.app.api.client.get('api/plugin/user/accounts/')
+            // Convert API data to internal data format.
+            const accountOptions = __res.data.map((i) => this.app.plugins.user.adapter._formatAccount(i))
             this.app.setState({
                 availability: {available: Boolean(selected.id), destinations, selected, sud: sud.id},
-                settings: {webrtc: {account: {status: null, options: platformAccounts}}},
+                settings: {webrtc: {account: {status: null, options: accountOptions}}},
             }, {persist: true})
 
-            this.app.logger.info(`${this}<platform> ${platformAccounts.length} accounts loaded`)
+            this.app.logger.info(`${this}<platform> ${accountOptions.length} accounts loaded`)
             if (callback) callback()
-
             resolve()
         })
+    }
+
+
+    /**
+    * Call the VoIPGRID API to set the account and to get the password
+    * back, which we need to connect to the websocket backend.
+    */
+    async _selectAccount({account, callback}) {
+        const res = await this.app.api.client.put('api/plugin/user/selected_account/', {id: account.id})
+        callback({account: this.app.plugins.user.adapter._formatAccount(res.data)})
     }
 
 
