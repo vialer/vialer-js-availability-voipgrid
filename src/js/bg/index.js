@@ -3,12 +3,6 @@ const AvailabilityAddon = require('vialer-js/bg/plugins/availability/addon')
 class AvailabilityAddonVg extends AvailabilityAddon {
     constructor(app) {
         super(app)
-
-        this.app.on('bg:availability:account_reset', () => {
-            const selected = app.utils.copyObject(this.app.state.user.platform.account)
-            this.app.logger.info(`${this}reset account to ConnectAB platform default ${selected.username}`)
-            this.app.setState({settings: {webrtc: {account: {selected}, enabled: false, toggle: false}}}, {persist: true})
-        })
     }
 
 
