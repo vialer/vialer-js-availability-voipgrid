@@ -22,6 +22,7 @@ class AvailabilityAddonVg extends AvailabilityAddon {
     * options when the module is loaded in the background.
     */
     _platformData({callback = null} = {}) {
+        let accountOptions = []
         return new Promise(async(resolve, reject) => {
             this.app.setState({settings: {webrtc: {account: {status: 'loading'}}}})
             let res
@@ -61,35 +62,21 @@ class AvailabilityAddonVg extends AvailabilityAddon {
                 return reject(err)
             }
 
-            let voipaccounts = res.data.objects
-            let platformAccounts = userdestination.phoneaccounts.map((i) => {
-                // The options for successful softphone usage.
-                let settings = {
-                    avpf: false,
-                    encryption: false,
-                    ua: null,
-                }
 
-                let registeredAccount = voipaccounts.find((j) => (j.account_id === i.account_id && j.sipreginfo))
-                if (registeredAccount) settings.ua = registeredAccount.sipreginfo.useragent
-                // The expert options need to be parsed first.
-                Object.assign(settings, this.app.utils.parseConfigLine(i.expert_options))
-                return {
-                    id: i.id,
-                    name: `${i.internal_number} - ${i.description}`,
-                    password: i.password,
-                    settings,
-                    uri: `sip:${i.account_id}@voipgrid.nl`,
-                    username: i.account_id,
-                }
-            })
+            try {
+                const res = await this.app.api.client.get('api/plugin/user/accounts/')
+                // Convert API data to internal data format.
+                accountOptions = res.data.map((i) => this.app.plugins.user.adapter._formatAccount(i))
+            } catch (err) {
+                return reject(err)
+            }
 
             this.app.setState({
                 availability: {available: Boolean(selected.id), destinations, selected, sud: sud.id},
-                settings: {webrtc: {account: {status: null, options: platformAccounts}}},
+                settings: {webrtc: {account: {status: null, options: accountOptions}}},
             }, {persist: true})
 
-            this.app.logger.info(`${this}<platform> ${platformAccounts.length} accounts loaded`)
+            this.app.logger.info(`${this}<platform> ${accountOptions.length} account options loaded`)
             if (callback) callback()
 
             resolve()
