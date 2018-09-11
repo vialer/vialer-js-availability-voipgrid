@@ -4,19 +4,7 @@ module.exports = (app, actions) => {
     */
     const AvailabilityVg = {
         computed: app.helpers.sharedComputed(),
-        methods: Object.assign({
-            openPlatformUrl: function(path = '') {
-                app.emit('bg:user:update-token', {
-                    callback: ({token}) => {
-                        path = `client/${this.user.client_id}/${path}`
-                        path = `user/autologin/?token=${token}&username=${this.user.username}&next=/${path}`
-                        let url = `${app.state.settings.platform.url}/${path}`
-                        if (app.env.isExtension) browser.tabs.create({url: url})
-                        window.open(url, '_blank')
-                    },
-                })
-            },
-        }, app.helpers.sharedMethods()),
+        methods: app.helpers.sharedMethods(),
         render: templates.vjs_addon_availability_vg_availability.r,
         staticRenderFns: templates.vjs_addon_availability_vg_availability.s,
         store: {

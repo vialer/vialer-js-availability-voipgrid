@@ -6,7 +6,7 @@
     .platform-availability {
         .switch[type="checkbox"] {
             & + label::before {
-                background: $yellow-color;
+                background: $orange-color;
             }
 
             &:checked + label::before {
