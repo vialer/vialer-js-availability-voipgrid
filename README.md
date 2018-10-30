@@ -1,2 +1,2 @@
-# vialer-js-availability-vg
-Vialer-js availability provider for VoIPGRID.
+# vjs-addon-availability-vg
+Vialer-js Availability provider for the VoIPGRID platform.

@@ -1,5 +1,5 @@
 {
-    "name": "vjs-addon-availability-vg",
+    "name": "@vialer/vjs-addon-availability-vg",
     "version": "3.0.0",
     "description": "Vialer-js Availability addon for the VoIPGRID API.",
     "main": "index.js",
