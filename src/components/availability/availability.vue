@@ -1,14 +1,15 @@
 <component class="component-availability-vg">
-    <Field name="platform_availability" type="checkbox" class="platform-availability"
+    <CheckboxField name="platform_availability" class="platform-availability"
         :disabled="!destinations.length"
         :help="$t('changes the availability of your {user} within a routing.', {user: `${vendor.name} ${$t('user')}`})"
         :label="`${$t('availability')} ${vendor.name} ${$t('user')}`"
-        :model.sync="available">
+        v-model="available">
 
         <template slot="checkbox-extra">
             <div v-if="available">
-                <Field name="owner" class="spacer-top-1x" type="select" v-if="available"
-                    :model.sync="selected"
+                <SelectField name="owner" class="spacer-top-1x"
+                    v-if="available"
+                    v-model="selected"
                     :options="destinations"
                     :placeholder="$t('select a destination')"/>
             </div>
@@ -29,5 +30,5 @@
                 </ul>
             </div>
         </template>
-    </Field>
+    </CheckboxField>
 </component>
